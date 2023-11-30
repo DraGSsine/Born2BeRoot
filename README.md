@@ -22,11 +22,11 @@ Since a physical volume cannot span over multiple drives, to span over more than
 *you can read more about it *[here](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/5/html/deployment_guide/ch-lvm)
 
 ### what's the diffrence between aptitude and apt
-f you consider only the command-line interfaces of each, they are quite similar as each of them offers you different ways to manage your packages. Therefore, there are a few differences that we can list:
+they are quite similar as each of them offers you different ways to manage your packages. Therefore, there are a few differences that we can list:
 
-1.*Apt offers a command-line interface, while aptitude offers a visual interface*
-2.*When facing a package conflict, `apt` will not fix the issue while `aptitude` will suggest a resolution that can do the job*
-3.*aptitude can interactively retrieve and displays the Debian changelog of all available official packages*
+1.Apt offers a command-line interface, while aptitude offers a visual interface
+2.When facing a package conflict, `apt` will not fix the issue while `aptitude` will suggest a resolution that can do the job
+3.aptitude can interactively retrieve and displays the Debian changelog of all available official packages
 
 ​Apt requires the user to have a solid knowledge of Linux systems and package management as you are running everything in the command line. It can be difficult for a novice to handle.
 
@@ -55,11 +55,13 @@ a firewall is a security system, either software or hardware, that acts as a bar
 -(UFW) is a user-friendly command-line interface (CLI) tool for managing and configuring firewall rules on Linux systems, primarily used on Ubuntu and Debian-based distributions. UFW is designed to simplify the process of setting up and managing firewall rules, making it more accessible for users who may not have extensive knowledge of firewall management or the underlying iptables framework *(It's like a friendly assistant for setting up rules for your firewall. It makes it easier for you to tell the security guard what's allowed and what's not, without needing to be an expert in security.)*
 
 ### Connect to your server using SSH
-ssh username@server-ip-address
-
+```
+$ ssh username@server-ip-address
+```
 ### Specify a custom port if your server uses a non-default SSH port
-ssh username@server-ip-address -p custom-port
-
+```
+$ ssh username@server-ip-address -p custom-port
+```
 ### Step 1: Installing *sudo*
 Switch to *root* and its environment via `su -`.
 ```
