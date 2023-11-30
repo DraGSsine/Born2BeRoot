@@ -1,7 +1,7 @@
 # 42cursus - Born2beroot
 
 ## Installation
-At the time of writing, the latest stable version of [Debian](https://www.debian.org) is *Debian 10 Buster*. Watch *bonus* installation walkthrough *(no audio)* [here](https://youtu.be/2w-2MX5QrQw).
+At the time of writing, the latest stable version of [Debian](https://www.debian.org) is *Debian 12 Buster*. Watch *bonus* installation walkthrough *(no audio)* [here](https://www.youtube.com/watch?v=73r3JbkCVy0&t=676s&ab_channel=MyCodeUrCode).
 
 ## *sudo*
 
