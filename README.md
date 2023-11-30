@@ -1,40 +1,64 @@
 # 42cursus - Born2beroot
 
-## Table of Contents
-1. [Installation](#installation)
-2. [*sudo*](#sudo)
-    - [Step 1: Installing *sudo*](#step-1-installing-sudo)
-    - [Step 2: Adding User to *sudo* Group](#step-2-adding-user-to-sudo-group)
-    - [Step 3: Running *root*-Privileged Commands](#step-3-running-root-privileged-commands)
-    - [Step 4: Configuring *sudo*](#step-4-configuring-sudo)
-3. [SSH](#ssh)
-    - [Step 1: Installing & Configuring SSH](#step-1-installing--configuring-ssh)
-    - [Step 2: Installing & Configuring UFW](#step-2-installing--configuring-ufw)
-    - [Step 3: Connecting to Server via SSH](#step-3-connecting-to-server-via-ssh)
-4. [User Management](#user-management)
-    - [Step 1: Setting Up a Strong Password Policy](#step-1-setting-up-a-strong-password-policy)
-       - [Password Age](#password-age)
-       - [Password Strength](#password-strength)
-    - [Step 2: Creating a New User](#step-2-creating-a-new-user)
-    - [Step 3: Creating a New Group](#step-3-creating-a-new-group)
-5. [*cron*](#cron)
-    - [Setting Up a *cron* Job](#setting-up-a-cron-job)
-6. [Bonus](#bonus)
-    - [Installation](#1-installation)
-    - [Linux Lighttpd MariaDB PHP *(LLMP)* Stack](#2-linux-lighttpd-mariadb-php-llmp-stack)
-       - [Step 1: Installing Lighttpd](#step-1-installing-lighttpd)
-       - [Step 2: Installing & Configuring MariaDB](#step-2-installing--configuring-mariadb)
-       - [Step 3: Installing PHP](#step-3-installing-php)
-       - [Step 4: Downloading & Configuring WordPress](#step-4-downloading--configuring-wordpress)
-       - [Step 5: Configuring Lighttpd](#step-5-configuring-lighttpd)
-    - [File Transfer Protocol *(FTP)*](#3-file-transfer-protocol-ftp)
-       - [Step 1: Installing & Configuring FTP](#step-1-installing--configuring-ftp)
-       - [Step 2: Connecting to Server via FTP](#step-2-connecting-to-server-via-ftp)
-
 ## Installation
 At the time of writing, the latest stable version of [Debian](https://www.debian.org) is *Debian 10 Buster*. Watch *bonus* installation walkthrough *(no audio)* [here](https://youtu.be/2w-2MX5QrQw).
 
 ## *sudo*
+
+### what's is AppArmor ?
+AppArmor is similar to SELinux, used by default in Fedora and Red Hat. While they work differently, both AppArmor and SELinux provide “mandatory access control” (MAC) security. In effect, AppArmor allows Ubuntu’s developers to restrict the actions processes can take.
+For example, one application that’s restricted in Ubuntu’s default configuration is the Evince PDF viewer. While Evince may run as your user account, it can only take specific actions. Evince only has the bare minimum of permissions needed to run and work with PDF documents. If a vulnerability were discovered in Evince’s PDF renderer and you opened a malicious PDF document that took over Evince, AppArmor would restrict the damage Evince could do. In the traditional Linux security model, Evince would have access to everything you have access to. With AppArmor, it only has access to things that a PDF viewer needs access to.
+
+*you can read more about it [her](https://www.howtogeek.com/118222/htg-explains-what-apparmor-is-and-how-it-secures-your-ubuntu-system/)*
+```
+viewing AppArmor's Status `sudo apparmor_status`
+```
+
+### what's is LVM ?
+LVM is a tool for logical volume management which includes allocating disks, striping, mirroring and resizing logical volumes.
+With LVM, a hard drive or set of hard drives is allocated to one or more physical volumes. LVM physical volumes can be placed on other block devices which might span two or more disks.
+The physical volumes are combined into logical volumes, with the exception of the /boot partition. The /boot partition cannot be on a logical volume group because the boot loader cannot read it. If the root (/) partition is on a logical volume, create a separate /boot partition which is not a part of a volume group.
+Since a physical volume cannot span over multiple drives, to span over more than one drive, create one or more physical volumes per drive.
+*you can read more about it *[here](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/5/html/deployment_guide/ch-lvm)
+
+### what's the diffrence between aptitude and apt
+f you consider only the command-line interfaces of each, they are quite similar as each of them offers you different ways to manage your packages. Therefore, there are a few differences that we can list:
+
+1.*Apt offers a command-line interface, while aptitude offers a visual interface*
+2.*When facing a package conflict, `apt` will not fix the issue while `aptitude` will suggest a resolution that can do the job*
+3.*aptitude can interactively retrieve and displays the Debian changelog of all available official packages*
+
+​Apt requires the user to have a solid knowledge of Linux systems and package management as you are running everything in the command line. It can be difficult for a novice to handle.
+
+On the other hand, aptitude with its interface is more user-friendly as it offers a layer of abstraction regarding the different sub-commands to use for installation, upgrades, etc.
+
+### what's SSH ?
+Before SSH, the commonly used protocol for remote connections was Telnet. However, Telnet had a significant security flaw. When you typed a command like "hello world" in your local terminal, it transmitted the command in plain text over the network. Anyone intercepting the traffic could read what you typed.
+
+In contrast, when you use SSH, your commands are encrypted before transmission. So, "hello world" becomes something like "e#31ori98gh32!" (encrypted) before being sent to your server in Paris. This encryption ensures that your data remains confidential and secure during transmission.
+
+### benefits of SSH
+*Security*: SSH provides a secure and encrypted connection, protecting your data from eavesdropping and unauthorized access.
+
+*Remote Management*: Easily manage and administer remote servers and devices.
+
+*Authentication*: SSH uses strong authentication methods, including passwords and public/private key pairs, ensuring that only authorized users can access your server.
+
+*Data Integrity*: Your data remains intact and unaltered during transmission.
+
+*Portability*: SSH is supported on various platforms, making it a versatile tool for remote access
+
+### what's is UFW
+-UFW is stand for (Uncomplicated Firewall) so for us to know the UFW we need to understand what's is firewall first.
+a firewall is a security system, either software or hardware, that acts as a barrier between your computer or network and potential threats from the internet or other networks. It is like a protective wall or filter that monitors and controls incoming and outgoing network traffic based on a set of predefined security rules or policies so in very simple terms *(ink of it as a security guard for your computer or network. It decides who is allowed to enter and leave, blocking anything suspicious or harmful.)*
+
+-(UFW) is a user-friendly command-line interface (CLI) tool for managing and configuring firewall rules on Linux systems, primarily used on Ubuntu and Debian-based distributions. UFW is designed to simplify the process of setting up and managing firewall rules, making it more accessible for users who may not have extensive knowledge of firewall management or the underlying iptables framework *(It's like a friendly assistant for setting up rules for your firewall. It makes it easier for you to tell the security guard what's allowed and what's not, without needing to be an expert in security.)*
+
+### Connect to your server using SSH
+ssh username@server-ip-address
+
+### Specify a custom port if your server uses a non-default SSH port
+ssh username@server-ip-address -p custom-port
 
 ### Step 1: Installing *sudo*
 Switch to *root* and its environment via `su -`.
