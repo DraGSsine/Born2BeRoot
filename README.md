@@ -3,6 +3,18 @@
 ## Installation
 At the time of writing, the latest stable version of [Debian](https://www.debian.org) is *Debian 12 Buster*. Watch *bonus* installation walkthrough *(no audio)* [here](https://www.youtube.com/watch?v=73r3JbkCVy0&t=676s&ab_channel=MyCodeUrCode).
 
+## partition
+
+| boot | 525 MB | ext2 |
+| root | 10.7 GB | ext4 |
+| swap | 2.5 GB | swap |
+| home | 5.4 GB | ext4 |
+| var | 3.2 GB | ext4 |
+| srv | 3.2 GB | ext4 |
+| tmp | 3.2 GB | ext2 |
+| var-log | 4.3 GB | ext4 |
+
+
 ## *sudo*
 
 ### what's is AppArmor ?
