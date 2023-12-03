@@ -5,8 +5,8 @@ At the time of writing, the latest stable version of [Debian](https://www.debian
 
 ## partition
 
-| boot | 525 MB | ext2 |
-| root | 10.7 GB | ext4 |
+| boot | 525 MB | ext2 |\n
+| root | 10.7 GB | ext4 |\n
 | swap | 2.5 GB | swap |
 | home | 5.4 GB | ext4 |
 | var | 3.2 GB | ext4 |
